@@ -22,6 +22,9 @@ struct MyAllocator {
 	void deallocate(T* p, std::size_t) {
 		std::free(p);
 	}
+
+private:
+		std::size_t n = 10;
 };
 
 template <typename Allocator>
