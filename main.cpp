@@ -12,11 +12,11 @@ struct MyAllocator {
 	template <typename U>
 	MyAllocator(const MyAllocator<U>&) {}
 
-	T* allocate(std::size_t n) {
-		auto p = std::malloc(n * sizeof(T));
-		if (!p)
+	T* allocate(std::size_t n)
+	{
+		if (n > 10) 
 			throw std::bad_alloc();
-		return reinterpret_cast<T*>(p);
+		return static_cast<T*>(::operator new(n * sizeof(T)));
 	}
 
 	void deallocate(T* p, std::size_t) {
