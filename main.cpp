@@ -8,6 +8,7 @@ struct MyAllocator {
 	using value_type = T;
 
 	MyAllocator() = default;
+	std::size_t n = 10;
 
 	template <typename U>
 	MyAllocator(const MyAllocator<U>&) {}
@@ -22,9 +23,6 @@ struct MyAllocator {
 	void deallocate(T* p, std::size_t) {
 		std::free(p);
 	}
-
-private:
-		std::size_t n = 10;
 };
 
 template <typename Allocator>
