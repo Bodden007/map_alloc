@@ -8,7 +8,7 @@ struct MyAllocator {
 	using value_type = T;
 
 	MyAllocator() = default;
-	std::size_t n = 10;
+	const std::size_t n = 10;
 
 	template <typename U>
 	MyAllocator(const MyAllocator<U>&) {}
@@ -56,7 +56,7 @@ int main()
 		vec.push_back(i);
 	}
 
-	std::vector<int, MyAllocator<int> > vec_alloc;
+	std::vector<int, MyAllocator<int> > vec_alloc(10);
 
 	for (int i = 0; i < 10; i++)
 	{
