@@ -10,8 +10,8 @@ struct MyAllocator {
 	MyAllocator() = default;
 	const std::size_t n = 10;
 
-	template <typename U>
-	MyAllocator(const MyAllocator<U>&) {}
+	//template <typename U>
+	//MyAllocator(const MyAllocator<U>&) {}
 
 	T* allocate(std::size_t n)
 	{
@@ -24,6 +24,7 @@ struct MyAllocator {
 		std::free(p);
 	}
 };
+
 
 template <typename Allocator>
 void factorial(std::map <int, int, std::less<int>, Allocator > & factor);
@@ -56,7 +57,7 @@ int main()
 		vec.push_back(i);
 	}
 
-	std::vector<int, MyAllocator<int> > vec_alloc(10);
+	std::vector<int, MyAllocator<int> > vec_alloc;
 
 	for (int i = 0; i < 10; i++)
 	{
