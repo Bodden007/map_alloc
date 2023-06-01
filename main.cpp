@@ -10,6 +10,9 @@ struct MyAllocator {
 	MyAllocator() = default;
 	const std::size_t n = 10;
 
+
+	// delete
+	// 
 	//template <typename U>
 	//MyAllocator(const MyAllocator<U>&) {}
 
