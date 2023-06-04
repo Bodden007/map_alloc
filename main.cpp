@@ -10,24 +10,23 @@ struct MyAllocator {
 	MyAllocator() = default;
 	const std::size_t n = 10;
 
+	template <typename U>
+	MyAllocator(const MyAllocator<U>&) {}
 
-	// delete
-	// 
-	//template <typename U>
-	//MyAllocator(const MyAllocator<U>&) {}
+	/*void* operator new[](size_t n) {};*/
 
 	T* allocate(std::size_t n)
 	{
+		void* operator new[](size_t n);
 		if (n > 10) 
 			throw std::bad_alloc();
 		return static_cast<T*>(::operator new(n * sizeof(T)));
 	}
 
 	void deallocate(T* p, std::size_t) {
-		std::free(p);
+		operator delete(p);
 	}
 };
-
 
 template <typename Allocator>
 void factorial(std::map <int, int, std::less<int>, Allocator > & factor);
@@ -104,4 +103,3 @@ void factorial(std::map <int, int, std::less<int>, Allocator > &factor)
 		}
 	}
 }
-
