@@ -13,11 +13,12 @@ struct MyAllocator {
 	template <typename U>
 	MyAllocator(const MyAllocator<U>&) {}
 
-	/*void* operator new[](size_t n) {};*/
+	void* operator new[](size_t n) {};
 
 	T* allocate(std::size_t n)
 	{
-		void* operator new[](size_t n);
+		
+		
 		if (n > 10) 
 			throw std::bad_alloc();
 		return static_cast<T*>(::operator new(n * sizeof(T)));
