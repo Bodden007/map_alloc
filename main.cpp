@@ -5,26 +5,28 @@
 
 template <typename T>
 struct MyAllocator {
+
 	using value_type = T;
+	T* m_memory{ nullptr };
+	size_t m_pozition{ 0 };
 
-	void* pool; ;
+	void* pool;
 	
-
 	MyAllocator() 
 	{
 		const std::size_t n = 10;
 		pool = ::operator new (n);
-
 	};
 	
+
+	//coercion
 	template <typename U>
 	MyAllocator(const MyAllocator<U>&) {}
 
 	T* allocate(std::size_t n)
 	{
-		if (n > 10)
-		
-		throw std::bad_alloc();
+		/*if (n > 10)
+			throw std::bad_alloc();*/
 		return static_cast<T*>(::operator new(n * sizeof(T)));
 		
 	}
