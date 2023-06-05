@@ -7,19 +7,26 @@ template <typename T>
 struct MyAllocator {
 	using value_type = T;
 
-	MyAllocator() = default;
-	const std::size_t n = 10;
+	void* pool; ;
+	
 
+	MyAllocator() 
+	{
+		const std::size_t n = 10;
+		pool = ::operator new (n);
+
+	};
+	
 	template <typename U>
 	MyAllocator(const MyAllocator<U>&) {}
 
 	T* allocate(std::size_t n)
 	{
-		void* p = operator new[](10);
+		if (n > 10)
 		
-		if (n > 10) 
-			//throw std::bad_alloc();
+		throw std::bad_alloc();
 		return static_cast<T*>(::operator new(n * sizeof(T)));
+		
 	}
 
 	void deallocate(T* p, std::size_t) {
